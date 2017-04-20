@@ -4,7 +4,7 @@ using namespace std;
 void Tablica::stworz(int rozmiar)
 {
 	tab=new int[rozmiar];
-  	rozmiar=rozmiar;
+  	_rozmiar=rozmiar;
 }
 void Tablica::wypelnij(int rozmiar)
 {	srand(time(0));
@@ -13,6 +13,36 @@ void Tablica::wypelnij(int rozmiar)
 	tab[i]=1+rand()%rozmiar;
 	}
 }
+
+const int& Tablica::Rozmiar() const {
+	return _rozmiar;
+}
+
+const int& Tablica::operator()( const unsigned int& idx ) const {
+	
+	if ( idx >= Rozmiar()  ) {
+		std::string wyjatek = "\nPrzekroczono zakres\n";
+		throw wyjatek;
+	}
+	
+
+	return tab[idx];
+}
+
+int& Tablica::operator()(const unsigned int& idx ) {
+
+	if ( idx >= Rozmiar()  ) {
+		std::string wyjatek = "\nPrzekroczono zakres\n";
+		throw wyjatek;
+	}
+	
+	return tab[idx];
+}
+
+
+
+
+
 void Tablica::wyswietl(int rozmiar)
 {
 	for(int i=0;i<rozmiar;i++)
@@ -33,3 +63,20 @@ void Tablica::run(int rozmiar)
 quicksort(tab,0,rozmiar-1,pivot);
 
 }
+
+std::ostream& operator<<(std::ostream& out,const Tablica& tab) {
+	
+	for ( unsigned int i = 0; i < tab.Rozmiar(); ++i) {
+		out << tab(i) << ' ';		
+	}
+
+	return out;
+}
+
+
+
+
+
+
+
+

@@ -6,6 +6,7 @@ using namespace std;
 class IRunnable 
 {
 public:
-	virtual void run(int lengthOfObject) = 0;
+	virtual void PrzygotujDoTestu()=0;
+	virtual void run(int) = 0;
 };
 #endif
